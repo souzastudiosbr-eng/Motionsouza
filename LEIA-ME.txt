@@ -1,0 +1,93 @@
+SOUZA MOTION STUDIO 3.0 — EDITOR DE MOTION GRAPHICS E PUBLICIDADE DIGITAL
+==========================================================================
+Roda 100% no navegador (celular e computador). Sem servidor, sem login, sem URL fixa.
+TODOS os arquivos ficam na mesma pasta (raiz única, sem subpastas).
+
+ARQUIVOS (deixe todos juntos)
+  index.html            página principal (abra este)
+  estilo.css            visual (tema escuro/amarelo, responsivo)
+  config.js             configurações editáveis (nome, fps padrão, limites, PWA on/off)
+  banco.js              armazenamento local (IndexedDB)
+  nucleo.js             modelo de projeto, linha do tempo, histórico (desfazer/refazer), migração
+  animacao.js           keyframes, curvas (easing/Bézier) e presets de animação
+  icones.js             ícones vetoriais, emojis, símbolos, texturas, fontes do sistema
+  midia.js              biblioteca de mídia, SVG seguro, remoção de fundo por cor, vídeo, waveform
+  audio.js              mixagem de áudio (Web Audio) para preview e exportação
+  render.js             renderizador de quadros e transições (mesmo código no preview e na exportação)
+  persistencia.js       salvar/abrir projetos (.json e .smsp), recuperação automática
+  exportar.js           exportação de vídeo e imagem
+  templates.js          12 templates editáveis de anúncio
+  ui.js, comandos.js, palco.js, linha-tempo.js, propriedades.js, paineis.js, app.js   interface
+  sw.js, manifest.webmanifest, icon.svg, icon-192.png, icon-512.png   PWA (instalável/offline)
+
+COMO USAR NO ANDROID
+  Opção A (mais simples): extraia o zip, abra a pasta no Acode ou Spck Editor e use "Preview".
+    Se a exportação de vídeo não funcionar no preview interno, abra o index.html no Chrome.
+  Opção B: hospede os arquivos (veja abaixo) e abra o endereço no Chrome; no menu use
+    "Instalar app" / "Adicionar à tela inicial". Depois de aberto uma vez, funciona offline.
+  Abrindo direto por file:// o editor funciona, mas o modo offline/instalável (service worker)
+  só liga com HTTPS ou localhost.
+
+HOSPEDAGEM
+  Envie todos os arquivos para qualquer hospedagem estática (GitHub Pages, Netlify, Cloudflare Pages,
+  servidor próprio, subpasta como /apps/motion/). Só há caminhos relativos: funciona em domínio,
+  subdomínio ou subdiretório sem alterar nada. Não precisa de backend nem de banco de dados.
+  HTTPS é recomendado (obrigatório para instalar como app e para o modo offline).
+  Se atualizar os arquivos e o navegador mostrar a versão antiga, mude VERSION em sw.js
+  (ex.: 'sms-3.0.1') e recarregue duas vezes.
+
+RECURSOS
+  - Camadas: texto, imagem/logotipo, vídeo, formas vetoriais, ícones, emojis, texturas, partículas,
+    fundos, áudio. Agrupar, bloquear, ocultar, duplicar, copiar/colar, alinhar, ordenar, componentes
+    reutilizáveis (salvos neste navegador).
+  - Palco: zoom, mover, réguas, guias, grade, ímã de alinhamento, margem segura, redimensionar, girar,
+    pinça/toque no celular.
+  - Animação: keyframes reais por propriedade (losango ao lado de cada campo), easings, curvas Bézier,
+    presets de entrada/saída/loop que viram keyframes editáveis, copiar/colar animação.
+    Dica: para animar uma propriedade, clique no losango dela no instante desejado; a partir daí,
+    alterar o valor com o cursor em outro instante cria/atualiza um keyframe.
+  - Cenas com transições (fade, deslizar, zoom, cortina, círculo...). Transição sobrepõe as cenas.
+  - Transparência: PNG/WebP/SVG mantêm o canal alpha. Remoção de fundo POR COR (global ou a partir das
+    bordas), com pré-visualização, não destrutiva (o original é mantido) e reversível.
+  - Templates editáveis (empresa, site, app, promoção, produto, serviço, lançamento, institucional,
+    convite, tipográfico, stories e "Souza Studios" como template inicial opcional).
+  - Projetos: salvamento automático neste navegador, lista de projetos, .json (leve) e .smsp
+    (pacote com as mídias). Projetos antigos (versão anterior do editor) são migrados.
+  - Exportação: vídeo (WebM VP9/VP8; MP4 SOMENTE se o navegador realmente gravar MP4), 480p a 2160p,
+    com áudio, barra de progresso e cancelamento; também PNG do quadro atual.
+  Atalhos: Espaço play/pausa · , e . quadro a quadro · Home/End · Del · Ctrl+Z/Y desfazer/refazer ·
+    Ctrl+C/X/V/D · Ctrl+G agrupar · S dividir clipe · setas movem (Shift = 10) · +/-/0 zoom · Ctrl+S salvar.
+
+TESTES REALMENTE EXECUTADOS (Chromium headless, servidor local, também em subpasta e file://)
+  - Carregamento sem erros no desktop (1366x800) e celular (390x780, toque); layout retrato conferido.
+  - Criar texto/forma/ícone/emoji/textura/partículas, desfazer/refazer, keyframes, presets, cenas e
+    transições, agrupar/copiar/colar, componentes, templates (12 renderizados).
+  - Salvar, recarregar e recuperar projeto; exportar/abrir .smsp com mídia; migração/normalização JSON.
+  - Remoção de fundo por cor (pixel conferido); sanitização de SVG (script/onclick removidos).
+  - Exportação real WebM VP9 + áudio Opus: verificada com ffprobe (duração 2,0 s, 480x854, áudio com sinal);
+    cancelamento; PNG com transparência.
+  - Offline com service worker; arrastar e redimensionar com mouse.
+  NÃO TESTADO: aparelho Android físico, Safari/iOS, Firefox, vídeos longos (>1 min) e arquivos grandes,
+    exportação MP4 (o Chromium de teste não grava MP4), importação de vídeo/fontes pelo usuário,
+    arrastar por toque real. Teste no seu aparelho antes de usar em produção.
+
+LIMITES (honestos)
+  - Não há remoção "inteligente" de fundo (IA). Só remoção por cor; funciona bem em fundo liso.
+  - A exportação é em TEMPO REAL (1 min de vídeo leva ~1 min) e a aba precisa ficar aberta e em
+    primeiro plano. Não há renderização em servidor.
+  - O formato depende do navegador (normalmente WebM). Não renomeamos WebM para MP4. Para MP4 converta
+    depois (ex.: HandBrake/ffmpeg) ou use um navegador que grave MP4.
+  - Áudio no preview só em velocidade 1x. Efeitos de filtro/espaçamento de letras dependem do navegador.
+  - Agrupamento: mover em grupo; redimensionar/girar vale para um elemento por vez.
+  - Mídias ficam no IndexedDB do navegador: limpar dados do site apaga projetos. Exporte .smsp como backup.
+  - Imagens/vídeos/fontes importados nunca são enviados a servidor algum.
+
+SEGURANÇA
+  SVG importado é sanitizado (sem scripts, eventos ou referências externas); textos do usuário nunca
+  entram como HTML; arquivos são validados por tipo e tamanho (limites em config.js); nada é carregado
+  de URLs externas; não há chaves ou segredos no código.
+
+DEPENDÊNCIAS E LICENÇAS
+  Nenhuma biblioteca externa: JavaScript, HTML e CSS puros. Os desenhos dos ícones são caminhos
+  vetoriais do conjunto Material Icons (Apache License 2.0). Fontes: apenas as do sistema do usuário
+  (você pode importar as suas; respeite a licença delas). Emojis seguem as fontes do aparelho.
